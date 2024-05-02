@@ -1,0 +1,22 @@
+[package]
+name = "fetch-rs"
+version = "0.1.0"
+edition = "2021"
+authors = [ "Dylan Turner <dylan.turner@tutanota.com>" ]
+license = "GPL-3.0"
+description = "Fetch CPU, GPU, etc info and display it to terminal with a nice graphic"
+readme = "README.md"
+categories = []
+repository = "https://github.com/blueOkiris/fetch-rs"
+
+[dependencies]
+clap = { version = "4.5", features = [ "derive" ] }
+dlopen = "0.1"
+dlopen_derive = "0.1"
+dirs = "5.0"
+futures = "0.3"
+os_info = "3.8"
+serde = { version = "1.0", features = [ "derive" ] }
+serde_json = "1.0"
+tokio = { version = "1.37", features = [ "full" ] }
+
