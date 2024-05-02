@@ -45,7 +45,6 @@ Supports:
 
 TODO:
 
-- Make lines line up if logo printed
 - Host (def)
 - Kernel (def)
 - Uptime (def)

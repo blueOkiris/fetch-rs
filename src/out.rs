@@ -14,6 +14,8 @@ use crate::{
     plugin::Plugin
 };
 
+const LOGO_OVRFLW_OFFST: usize = 46;
+
 /// Supported distros
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 enum Distro {
@@ -96,36 +98,39 @@ pub async fn out_lines(cfg: &Config, plugins: &Vec<Arc<Container<Plugin>>>) -> V
 
     // Create a buffer with all the built-in outputs
     let mut lines = Vec::new();
+    let mut line_pfx = "".to_string();
     let mut line_ind = 0;
     if cfg.show_distro {
         // If drawing the distro, seed lines with data
         let distro_lines = outputs[&OutputType::Distro].lines()
             .map(|s| format!("{}{}", s, COLORS[7].1))
             .collect::<Vec<_>>();
+        line_pfx = " ".repeat(LOGO_OVRFLW_OFFST);
         lines = distro_lines;
     }
     if cfg.show_os {
-        // You'll see this pattern throughout
-        // We may or may not have the lines seeded with the logo data
-        // If we do, print to the right, else just push a new line
-        if line_ind < lines.len() {
-            lines[line_ind].push_str(outputs[&OutputType::OS].as_str());
-        } else {
-            lines.push(outputs[&OutputType::OS].clone());
-        }
+        add_line(outputs[&OutputType::OS].as_str(), line_pfx.as_str(), &mut lines, &mut line_ind);
     }
 
     // Then add plugin outputs
     for plugin_output in plugin_outputs.iter() {
-        if line_ind < lines.len() {
-            lines[line_ind].push_str(plugin_output.as_str());
-        } else {
-            lines.push(plugin_output.clone());
-        }
-        line_ind += 1;
+        add_line(plugin_output.as_str(), line_pfx.as_str(), &mut lines, &mut line_ind);
     }
 
     lines
+}
+
+/// You'd see this pattern throughout if not for this func.
+/// We may or may not have the lines seeded with the logo data.
+/// If we do, print to the right, else just push a new line.
+/// Also, when printing new lines, if we drew the logo, align them with the rest of the text
+fn add_line(line: &str, line_pfx: &str, lines: &mut Vec<String>, line_ind: &mut usize) {
+    if *line_ind < lines.len() {
+        lines[*line_ind].push_str(line);
+    } else {
+        lines.push(format!("{}{}", line_pfx, line));
+    }
+    *line_ind += 1;
 }
 
 async fn distro_logo() -> (OutputType, String) {
