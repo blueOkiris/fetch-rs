@@ -43,6 +43,35 @@ Supports:
    + Distro Nickname
    + Architecture
 
+TODO:
+
+- Make lines line up if logo printed
+- Host (def)
+- Kernel (def)
+- Uptime (def)
+- Packages (def)
+- Shell (def)
+- Resolution (def)
+- DE (def)
+- WM (def)
+- WM Theme (def)
+- Theme (def)
+- Icons (def)
+- Terminal (def)
+- Terminal Font (def)
+- CPU (def)
+- GPU (def)
+- Memory (def)
+- CPU Usage (not def)
+- Disk (not def)
+- Battery (not def)
+- Font (not def)
+- Song (not def)
+- Local IP (not def)
+- Public IP (not def)
+- Users (not def)
+- Birthday (not def)
+
 You can also add custom plugins. Create a program that supports a C ABI function with this function signature: `const char *int_output(void)`
 
 Compile a `.so` and place it in `~/.config/fetch-rs/plugins/`
