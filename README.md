@@ -47,5 +47,5 @@ You can also add custom plugins. Create a program that supports a C ABI function
 
 Compile a `.so` and place it in `~/.config/fetch-rs/plugins/`
 
-It's `int_output` function will print after
+It's `int_output` function will print after the built-in outputs
 
