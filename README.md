@@ -6,7 +6,7 @@ Fetch CPU, GPU, OS info, etc and display it to terminal with a nice distro-depen
 
 Features different from other fetch scripts:
 
-- Single binary (assuming no blugins)
+- Single binary (assuming no plugins)
 - Compiled and fast
 - Asynchronous to look up information
 - Plugin support
