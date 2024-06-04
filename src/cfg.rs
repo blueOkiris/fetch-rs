@@ -22,6 +22,9 @@ pub struct Config {
     /// If true, show OS information if possible. Defaults to true
     pub show_os: bool,
 
+    /// If true, shows the host of the machine, i.e. motherboard
+    pub show_host: bool,
+
     /// If true, show the kernel version. Defaults to true
     pub show_kernel: bool,
 
@@ -103,6 +106,7 @@ impl Default for Config {
         Self {
             show_distro: true,
             show_os: true,
+            show_host: true,
             show_kernel: true,
             show_uptime: true,
             show_packages: true,

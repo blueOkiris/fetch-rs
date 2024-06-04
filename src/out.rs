@@ -42,6 +42,9 @@ pub enum OutputType {
     /// Print OS in the format: DistroName Version (Nickname) Architecture
     OS,
 
+    /// Print the manufacturer
+    Host,
+
     /// Print the Kernel in the typical format: 6.6.32
     Kernel,
 
@@ -78,6 +81,9 @@ pub async fn out_lines(cfg: &Config, plugins: &Vec<Arc<Container<Plugin>>>) -> V
     }
     if cfg.show_os {
         set.spawn(crate::info::os());
+    }
+    if cfg.show_host {
+        set.spawn(crate::info::host());
     }
     if cfg.show_kernel {
         set.spawn(crate::info::kernel());
@@ -125,6 +131,12 @@ pub async fn out_lines(cfg: &Config, plugins: &Vec<Arc<Container<Plugin>>>) -> V
     }
     if cfg.show_os {
         add_line(outputs[&OutputType::OS].as_str(), line_pfx.as_str(), &mut lines, &mut line_ind);
+    }
+    if cfg.show_host {
+        add_line(
+            outputs[&OutputType::Host].as_str(), line_pfx.as_str(),
+            &mut lines, &mut line_ind
+        );
     }
     if cfg.show_kernel {
         add_line(

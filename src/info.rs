@@ -1,8 +1,7 @@
 //! Functions for getting information to print
 
 use std::{
-    collections::HashMap,
-    process::Command
+    collections::HashMap, fs::File, io::{BufReader, Read}, process::Command
 };
 use procfs::{Current, Uptime};
 
@@ -40,6 +39,32 @@ pub async fn os() -> (OutputType, String) {
             }
         )
     )
+}
+
+pub async fn host() -> (OutputType, String) {
+    if let Ok(board_vendor) = File::open("/sys/devices/virtual/dmi/id/board_vendor") {
+        let mut reader = BufReader::new(board_vendor);
+        let mut vendor = "".to_string();
+        match reader.read_to_string(&mut vendor) {
+            Ok(_) => {
+                if let Ok(board_name) = File::open("/sys/devices/virtual/dmi/id/board_name") {
+                    reader = BufReader::new(board_name);
+                    let mut board = "".to_string();
+                    match reader.read_to_string(&mut board) {
+                        Ok(_) => return (
+                            OutputType::Host,
+                            format!(
+                                "Host: {} {}",
+                                &vendor[0..vendor.len() - 1],
+                                &board[0..board.len() - 1]
+                            )
+                        ), _ => {}
+                    }
+                }
+            }, _ => {}
+        }
+    }
+    (OutputType::Host, "".to_string())
 }
 
 pub async fn kernel() -> (OutputType, String) {
