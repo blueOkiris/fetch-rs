@@ -2,6 +2,7 @@
 
 mod cfg;
 mod plugin;
+mod info;
 mod out;
 
 #[tokio::main]
