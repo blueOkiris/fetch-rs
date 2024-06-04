@@ -70,6 +70,7 @@ TODO:
 - Public IP (not def)
 - Users (not def)
 - Birthday (not def)
+- Colors (def)
 
 You can also add custom plugins. Create a program that supports a C ABI function with this function signature: `const char *int_output(void)`
 
