@@ -1,5 +1,7 @@
 # Fetch-rs
 
+![screenshot](./screenshot.png)
+
 ## Description
 
 Fetch CPU, GPU, OS info, etc and display it to terminal with a nice distro-dependent graphic.
