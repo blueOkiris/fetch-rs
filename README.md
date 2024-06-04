@@ -42,12 +42,12 @@ Supports:
    + Distro Release Version
    + Distro Nickname
    + Architecture
+- Host
+- Kernel
+- Uptime
 
 TODO:
 
-- Host (def)
-- Kernel (def)
-- Uptime (def)
 - Packages (def)
 - Shell (def)
 - Resolution (def)
